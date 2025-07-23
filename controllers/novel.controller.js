@@ -24,8 +24,7 @@ exports.createNovel = async (req, res) => {
 exports.updateNovel = async (req, res) => {
   try {
     const { id } = req.params;
-    const novel = await Novel.findByIdAnd;
-    Update(id, req.body, { new: true });
+    const novel = await Novel.findByIdAndUpdate(id, req.body, { new: true });
     if (!novel) {
       return res.status(404).json({ message: "Roman non trouvé" });
     }
