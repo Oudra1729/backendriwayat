@@ -51,3 +51,17 @@ exports.deleteNovel = async (req, res) => {
   }
 };
 
+exports.getNovelById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const novel = await Novel.findById(id).populate('author', 'username');
+    if (!novel) {
+      return res.status(404).json({ message: "Roman non trouvé" });
+    }       
+    res.status(200).json(novel);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Erreur lors de la récupération du roman", error });
+  }
+}
